@@ -1,15 +1,39 @@
+@echo off
+cls
+echo ================================
+echo   Creando estructura del backend
+echo ================================
+
+:: Crear carpeta principal (opcional)
+:: mkdir ProyectoBackend
+:: cd ProyectoBackend
+
+:: Carpetas base
 mkdir db
 mkdir src
+
+:: Dentro de src
 cd src
 mkdir controllers
-mkdir views
-cd views
-cd
+mkdir models
 mkdir routes
+mkdir services
+mkdir config
 mkdir public
-cd
-rem SET rutapp
-rem d:
-rem cd %rutapp%
-rem npm init 
-rem npm install express mysql express-myconec
+mkdir tests
+
+:: Subcarpetas de public
+cd public
+mkdir css
+mkdir js
+mkdir images
+
+:: Regresar a raíz del proyecto
+cd ..
+cd ..
+
+echo =================================
+echo   Estructura generada con exito!
+echo =================================
+
+pause
