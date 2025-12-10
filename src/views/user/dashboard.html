@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Usuario — Dashboard (preview)</title>
+  <link rel="stylesheet" href="../public/css/styles.css">
+  <link rel="stylesheet" href="../public/css/user.css">
+  <style>body{height:100%;align-items:flex-start}</style>
+</head>
+<body>
+  <div class="container">
+    <aside class="brand card">
+      <div class="profile">
+        <img src="../images/logo.png" alt="logo">
+        <h1>Juan López</h1>
+        <p class="meta">juan@example.com</p>
+        <p class="meta">Usuario</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="card">
+        <div class="user-hero">
+          <div>
+            <div class="title">Panel de Usuario</div>
+            <div class="meta">Bienvenido a tu espacio</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <a class="btn secondary" href="#">Inicio</a>
+            <button class="btn" style="background:#ef4444">Cerrar sesión</button>
+          </div>
+        </div>
+
+        <div class="main-grid" style="margin-top:14px">
+          <div class="stat"><div class="number">3</div><p>Mis pedidos</p></div>
+          <div class="stat"><div class="number">5</div><p>Favoritos</p></div>
+          <div class="stat"><div class="number">1</div><p>Cupones</p></div>
+        </div>
+
+        <div style="margin-top:14px">
+          <div class="panel orders-list">
+            <h3>Últimos pedidos</h3>
+            <ul>
+              <li>#1023 — Entregado</li>
+              <li>#1019 — En camino</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

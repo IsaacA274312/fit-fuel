@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Nutriólogo — Dashboard (preview)</title>
+  <link rel="stylesheet" href="../public/css/styles.css">
+  <link rel="stylesheet" href="../public/css/nutriologo.css">
+  <style>body{height:100%;align-items:flex-start}</style>
+</head>
+<body>
+  <div class="container">
+    <aside class="brand card">
+      <div class="profile">
+        <img src="../images/logo.png" alt="logo">
+        <h1>Ana Gómez</h1>
+        <p class="meta">ana@example.com</p>
+        <p class="meta">Nutriólogo</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="card">
+        <div class="nutri-hero">
+          <div>
+            <div class="title">Panel de Nutriólogo</div>
+            <div class="meta">Gestiona planes y seguimiento</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <a class="btn secondary" href="#">Inicio</a>
+            <button class="btn" style="background:#ef4444">Cerrar sesión</button>
+          </div>
+        </div>
+
+        <div class="main-grid" style="margin-top:14px">
+          <div class="stat"><div class="number">8</div><p>Planes</p></div>
+          <div class="stat"><div class="number">24</div><p>Clientes</p></div>
+          <div class="stat"><div class="number">4</div><p>Evaluaciones</p></div>
+        </div>
+
+        <div style="margin-top:14px">
+          <div style="display:flex;gap:8px">
+            <button class="tab small active">Planes</button>
+            <button class="tab small">Crear plan</button>
+            <button class="tab small">Clientes</button>
+          </div>
+
+          <div class="panel plans-list" style="margin-top:12px">
+            <h3>Planes activos</h3>
+            <ul>
+              <li>Plan pérdida de grasa — 12 semanas</li>
+              <li>Plan mantenimiento — 8 semanas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

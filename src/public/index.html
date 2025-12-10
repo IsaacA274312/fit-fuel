@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>FitAndFuel — Autenticación</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+</head>
+<body>
+<div class="container" style="display:flex;gap:20px;align-items:flex-start;max-width:600px">
+  <div class="logo-container" style="flex:0 0 140px;background:rgba(255,255,255,0.03);border-radius:16px;padding:20px;text-align:center;box-shadow:0 8px 32px rgba(76, 74, 74, 0.3)">
+    <img src="images/logo.jpg" alt="FitAndFuel logo" style="width:100px;height:100px;object-fit:cover;border-radius:12px;background:rgba(255,255,255,0.06);padding:6px;margin-bottom:12px">
+    <h1 style="margin:0 0 6px;font-size:18px">FitAndFuel</h1>
+    <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.7);line-height:1.4">Tu plataforma de fitness y nutrición</p>
+  </div>
+  <div class="card" aria-live="polite" style="flex:1;max-width:420px">
+    <div style="display:flex;gap:6px;margin-bottom:12px">
+      <div id="tab-login" class="tab active">Iniciar sesión</div>
+      <div id="tab-register" class="tab">Crear cuenta</div>
+    </div>
+
+    <div id="globalMsg" style="margin-bottom:10px;color:#ffb3b3;font-size:13px"></div>
+
+    <!-- LOGIN -->
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="loginEmail">Email</label>
+        <input id="loginEmail" name="email" type="email" required>
+        <div class="error" data-error-for="loginEmail"></div>
+      </div>
+      <div class="field">
+        <label for="loginPassword">Contraseña</label>
+        <input id="loginPassword" name="password" type="password" required minlength="6">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="error" data-error-for="loginPassword"></div>
+          <button type="button" id="toggleLoginPwd" style="background:none;border:none;color:var(--accent);cursor:pointer">Mostrar</button>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn" type="submit" id="loginBtn">Entrar</button>
+        <button type="button" class="btn" id="toRegister" style="background:transparent;color:var(--accent);border:1px solid rgba(255,255,255,0.08)">Crear cuenta</button>
+      </div>
+    </form>
+
+    <!-- REGISTER -->
+    <form id="registerForm" style="display:none" novalidate>
+      <div class="field">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" type="text" required>
+        <div class="error" data-error-for="nombre"></div>
+      </div>
+
+      <div style="display:flex;gap:8px">
+        <div class="field" style="flex:1">
+          <label for="apellidoP">Apellido paterno</label>
+          <input id="apellidoP" name="apellido_paterno" type="text" required>
+          <div class="error" data-error-for="apellidoP"></div>
+        </div>
+        <div class="field" style="flex:1">
+          <label for="apellidoM">Apellido materno</label>
+          <input id="apellidoM" name="apellido_materno" type="text" required>
+          <div class="error" data-error-for="apellidoM"></div>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:6px">
+        <label for="telefono">Teléfono</label>
+        <input id="telefono" name="telefono" type="text" placeholder="+34 600 000 000" required>
+        <div class="error" data-error-for="telefono"></div>
+      </div>
+
+      <div class="field" style="margin-top:6px">
+        <label for="fechaNacimiento">Fecha de nacimiento</label>
+        <input id="fechaNacimiento" name="fecha_nacimiento" type="date" required>
+        <div class="error" data-error-for="fechaNacimiento"></div>
+      </div>
+
+      <div class="field" style="margin-top:6px">
+        <label for="genero">Género</label>
+        <select id="genero" name="genero" required>
+          <option value="">Selecciona...</option>
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+          <option value="otro">Otro</option>
+          <option value="prefiero_no_decirlo">Prefiero no decirlo</option>
+        </select>
+        <div class="error" data-error-for="genero"></div>
+      </div>
+
+      <div class="field" style="margin-top:6px">
+        <label for="tipoUsuario">Tipo de usuario</label>
+        <select id="tipoUsuario" name="tipo_usuario" required>
+          <option value="">Selecciona...</option>
+          <option value="usuario">Usuario</option>
+          <option value="instructor">Instructor</option>
+          <option value="nutriologo">Nutriólogo</option>
+          <option value="admin">Administrador</option>
+        </select>
+        <div class="error" data-error-for="tipoUsuario"></div>
+      </div>
+
+      <div class="field">
+        <label for="regEmail">Email</label>
+        <input id="regEmail" name="email" type="email" required>
+        <div class="error" data-error-for="regEmail"></div>
+      </div>
+
+      <div class="field">
+        <label for="regPassword">Contraseña (mín 8 caracteres)</label>
+        <input id="regPassword" name="password" type="password" required minlength="8" autocomplete="new-password">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="error" data-error-for="regPassword"></div>
+          <button type="button" id="toggleRegPwd" style="background:none;border:none;color:var(--accent);cursor:pointer">Mostrar</button>
+        </div>
+        <div class="strength-meter" aria-hidden="true"><div id="strengthBar" class="strength-bar"></div></div>
+        <div id="strengthText" class="strength-text">Introduce una contraseña</div>
+      </div>
+
+      <div class="field">
+        <label for="regPasswordConfirm">Confirmar contraseña</label>
+        <input id="regPasswordConfirm" name="password_confirm" type="password" required minlength="8" autocomplete="new-password">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="error" data-error-for="regPasswordConfirm"></div>
+          <button type="button" id="toggleRegPwdConfirm" style="background:none;border:none;color:var(--accent);cursor:pointer">Mostrar</button>
+        </div>
+      </div>
+
+      <div class="actions" style="margin-top:4px">
+        <button class="btn" type="submit" id="regBtn">Registrarme</button>
+        <button type="button" class="btn" id="toLogin" style="background:transparent;color:var(--accent);border:1px solid rgba(255,255,255,0.08)">Volver</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<script>
+const qs = s => document.querySelector(s);
+const qsa = s => document.querySelectorAll(s);
+const tabLogin = qs('#tab-login'), tabRegister = qs('#tab-register');
+const loginForm = qs('#loginForm'), regForm = qs('#registerForm');
+const globalMsg = qs('#globalMsg');
+const strengthBar = qs('#strengthBar');
+const strengthText = qs('#strengthText');
+
+function switchTo(login){
+  if(login){
+    tabLogin.classList.add('active'); tabRegister.classList.remove('active');
+    loginForm.style.display='block';
+    regForm.style.display='none';
+  } else {
+    tabRegister.classList.add('active'); tabLogin.classList.remove('active');
+    loginForm.style.display='none';
+    regForm.style.display='block';
+  }
+  clearMessages();
+}
+tabLogin.addEventListener('click', ()=>switchTo(true));
+tabRegister.addEventListener('click', ()=>switchTo(false));
+qs('#toRegister').addEventListener('click', ()=>switchTo(false));
+qs('#toLogin').addEventListener('click', ()=>switchTo(true));
+
+function clearMessages(){ globalMsg.textContent=''; qsa('.error').forEach(e=>e.textContent=''); }
+function setFieldError(input, msg){ const err = qs('[data-error-for="'+input.id+'"]'); if(err) err.textContent = msg; }
+function setLoading(btn, on){ if(on){ btn.disabled=true; btn.dataset.orig=btn.textContent; btn.innerHTML='<span class="loader"></span>   Procesando...'; } else { btn.disabled=false; btn.innerHTML=btn.dataset.orig||btn.textContent; } }
+async function postJSON(url,payload){
+  const started = Date.now();
+  try {
+    const res = await fetch(url,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    const text = await res.text();
+    let parsed;
+    try { parsed = JSON.parse(text); } catch(e){
+      parsed = { success:false, message:'Respuesta no válida del servidor', status:res.status, raw:text };
+    }
+    parsed._debug = { url, status:res.status, ms: Date.now()-started };
+    return parsed;
+  } catch(err){
+    return { success:false, network:true, message:'Fallo de conexión', error: err.message, _debug:{ url, ms: Date.now()-started } };
+  }
+}
+
+/* scoring */
+function scorePassword(p){ let score=0; if(!p) return 0; if(p.length>=8) score++; if(/[A-Z]/.test(p)) score++; if(/[0-9]/.test(p)) score++; if(/[\W_]/.test(p)) score++; return score; }
+function updateStrengthUI(p){ const score=scorePassword(p); const pct=(score/4)*100; strengthBar.style.width=pct+'%'; let text='Muy débil'; if(score===0) { text='Introduce una contraseña'; strengthBar.style.background='linear-gradient(90deg,#ff5252,#ffb347)'; } else if(score<=1){ text='Débil'; strengthBar.style.background='linear-gradient(90deg,#ff5252,#ff7f50)'; } else if(score===2){ text='Aceptable'; strengthBar.style.background='linear-gradient(90deg,#ffb347,#ffd54a)'; } else if(score===3){ text='Fuerte'; strengthBar.style.background='linear-gradient(90deg,#9ccc65,#8bc34a)'; } else { text='Muy fuerte'; strengthBar.style.background='linear-gradient(90deg,#66bb6a,#2e7d32)'; } strengthText.textContent=text; return score; }
+
+/* LOGIN handlers */
+qs('#toggleLoginPwd').addEventListener('click', e=>{ const p=qs('#loginPassword'); p.type = p.type==='password' ? 'text' : 'password'; e.target.textContent = p.type==='password' ? 'Mostrar' : 'Ocultar'; });
+        loginForm.addEventListener('submit', async e=>{
+          e.preventDefault();
+          clearMessages();
+          const btn = qs('#loginBtn');
+          setLoading(btn, true);
+          const data = { email: qs('#loginEmail').value.trim(), password: qs('#loginPassword').value };
+          if(!data.email || !data.password){ setFieldError(qs('#loginEmail'), !data.email ? 'Email requerido':'' ); setFieldError(qs('#loginPassword'), !data.password ? 'Contraseña requerida':'' ); setLoading(btn,false); return; }
+          try{
+            const r = await postJSON('login.php', data);
+            console.log('Login respuesta debug:', r._debug || r);
+            if(r.network){
+              globalMsg.style.color = '#ffb3b3';
+              globalMsg.textContent = 'Error de red: ' + (r.error || 'desconocido');
+            } else if(r.success){
+              globalMsg.style.color = 'lightgreen';
+              globalMsg.textContent = r.message || 'Login correcto';
+              const redirect = r.redirect || '/fitandfuel/src/views/user/dashboard.php';
+              setTimeout(()=>{ location.href = redirect; }, 600);
+            } else {
+              globalMsg.style.color = '#ffb3b3';
+              globalMsg.textContent = (r.message || 'Error') + (r.status ? ` (HTTP ${r.status})` : '');
+              if(r.raw) console.warn('Respuesta no JSON:', r.raw);
+            }
+          } catch(err){
+            globalMsg.style.color = '#ffb3b3';
+            globalMsg.textContent = 'Error de red';
+            console.error(err);
+          }
+          setLoading(btn,false);
+        });
+
+/* REGISTER handlers */
+qs('#toggleRegPwd').addEventListener('click', e=>{ const p=qs('#regPassword'); p.type = p.type==='password' ? 'text' : 'password'; e.target.textContent = p.type==='password' ? 'Mostrar' : 'Ocultar'; });
+qs('#toggleRegPwdConfirm').addEventListener('click', e=>{ const p=qs('#regPasswordConfirm'); p.type = p.type==='password' ? 'text' : 'password'; e.target.textContent = p.type==='password' ? 'Mostrar' : 'Ocultar'; });
+qs('#regPassword').addEventListener('input', e=>{ updateStrengthUI(e.target.value); });
+
+regForm.addEventListener('submit', async e=>{ 
+  e.preventDefault(); clearMessages(); const btn=qs('#regBtn'); setLoading(btn,true);
+  const payload = {
+    nombre: qs('#nombre').value.trim(),
+    apellido_paterno: qs('#apellidoP').value.trim(),
+    apellido_materno: qs('#apellidoM').value.trim(),
+    telefono: qs('#telefono').value.trim(),
+    fecha_nacimiento: qs('#fechaNacimiento').value,
+    genero: qs('#genero').value,
+    tipo_usuario: qs('#tipoUsuario').value.trim(),
+    email: qs('#regEmail').value.trim(),
+    password: qs('#regPassword').value,
+    password_confirm: qs('#regPasswordConfirm').value
+  };
+
+  // validación cliente
+  if(!payload.nombre){ setFieldError(qs('#nombre'),'Nombre requerido'); setLoading(btn,false); return; }
+  if(!payload.apellido_paterno){ setFieldError(qs('#apellidoP'),'Apellido paterno requerido'); setLoading(btn,false); return; }
+  if(!payload.apellido_materno){ setFieldError(qs('#apellidoM'),'Apellido materno requerido'); setLoading(btn,false); return; }
+  if(!payload.telefono){ setFieldError(qs('#telefono'),'Teléfono requerido'); setLoading(btn,false); return; }
+  if(!payload.fecha_nacimiento){ setFieldError(qs('#fechaNacimiento'),'Fecha requerida'); setLoading(btn,false); return; }
+  if(!payload.genero){ setFieldError(qs('#genero'),'Seleccione género'); setLoading(btn,false); return; }
+  if(!payload.tipo_usuario){ setFieldError(qs('#tipoUsuario'),'Tipo de usuario requerido'); setLoading(btn,false); return; }
+  if(!payload.email){ setFieldError(qs('#regEmail'),'Email requerido'); setLoading(btn,false); return; }
+
+  // validación de teléfono (8-15 dígitos, puede incluir +, espacios, guiones)
+  if(payload.telefono && !/^\+?[0-9\-\s]{8,15}$/.test(payload.telefono)){
+    setFieldError(qs('#telefono'),'Teléfono inválido'); setLoading(btn,false); return;
+  }
+
+  // validación de fecha de nacimiento (1900-01-01 a hoy-10 años)
+  if(payload.fecha_nacimiento){
+    const minDate = new Date('1900-01-01');
+    const maxDate = new Date(); maxDate.setFullYear(maxDate.getFullYear()-10);
+    const fecha = new Date(payload.fecha_nacimiento);
+    if(fecha < minDate || fecha > maxDate){
+      setFieldError(qs('#fechaNacimiento'),'Fecha fuera de rango'); setLoading(btn,false); return;
+    }
+  }
+
+  const score = updateStrengthUI(payload.password);
+  if(score < 3){ setFieldError(qs('#regPassword'),'Contraseña demasiado débil'); globalMsg.style.color='#ffb3b3'; globalMsg.textContent='Usa al menos 8 caracteres con mayúsculas, minúsculas, números y símbolos.'; setLoading(btn,false); return; }
+  if(payload.password.length < 8){ setFieldError(qs('#regPassword'),'Mínimo 8 caracteres'); setLoading(btn,false); return; }
+  if(payload.password !== payload.password_confirm){ setFieldError(qs('#regPasswordConfirm'),'Las contraseñas no coinciden'); globalMsg.style.color='#ffb3b3'; globalMsg.textContent='Las contraseñas deben coincidir'; setLoading(btn,false); return; }
+
+  try {
+    const r = await postJSON('register.php', {
+      nombre: payload.nombre,
+      apellido_paterno: payload.apellido_paterno,
+      apellido_materno: payload.apellido_materno,
+      telefono: payload.telefono,
+      fecha_nacimiento: payload.fecha_nacimiento,
+      genero: payload.genero,
+      tipo_usuario: payload.tipo_usuario,
+      email: payload.email,
+      password: payload.password
+    });
+    console.log('Registro respuesta debug:', r._debug || r);
+    if(r.network){
+      globalMsg.style.color='#ffb3b3';
+      globalMsg.textContent='Error de red: ' + (r.error || 'desconocido');
+    } else if(r.success){
+      globalMsg.style.color='lightgreen';
+      globalMsg.textContent=r.message||'Registro correcto';
+      regForm.reset(); updateStrengthUI('');
+      setTimeout(()=>switchTo(true),800);
+    } else {
+      globalMsg.style.color='#ffb3b3';
+      globalMsg.textContent=(r.message||'Error') + (r.status ? ` (HTTP ${r.status})` : '');
+      if(r.raw) console.warn('Respuesta no JSON:', r.raw);
+    }
+  } catch(err){
+    globalMsg.style.color='#ffb3b3';
+    globalMsg.textContent='Error de red';
+    console.error(err);
+  }
+  setLoading(btn,false);
+});
+
+// Animaciones de entrada con Anime.js
+anime({
+  targets: '.logo-container',
+  translateY: [-30, 0],
+  opacity: [0, 1],
+  duration: 800,
+  easing: 'easeOutExpo'
+});
+
+anime({
+  targets: '.card',
+  translateX: [30, 0],
+  opacity: [0, 1],
+  duration: 800,
+  delay: 200,
+  easing: 'easeOutExpo'
+});
+
+// Animación al cambiar entre login y register
+tabLogin.addEventListener('click', () => {
+  anime({
+    targets: regForm,
+    opacity: [1, 0],
+    duration: 200,
+    easing: 'easeInQuad',
+    complete: () => {
+      switchTo(true);
+      anime({
+        targets: loginForm,
+        opacity: [0, 1],
+        duration: 400,
+        easing: 'easeOutQuad'
+      });
+    }
+  });
+});
+
+tabRegister.addEventListener('click', () => {
+  anime({
+    targets: loginForm,
+    opacity: [1, 0],
+    duration: 200,
+    easing: 'easeInQuad',
+    complete: () => {
+      switchTo(false);
+      anime({
+        targets: regForm,
+        opacity: [0, 1],
+        duration: 400,
+        easing: 'easeOutQuad'
+      });
+    }
+  });
+});
+</script>
+</body>
+</html>

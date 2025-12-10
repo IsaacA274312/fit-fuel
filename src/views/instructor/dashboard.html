@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Instructor — Dashboard (preview)</title>
+  <link rel="stylesheet" href="../public/css/styles.css">
+  <link rel="stylesheet" href="../public/css/instructor.css">
+  <style>body{height:100%;align-items:flex-start}</style>
+</head>
+<body>
+  <div class="container">
+    <aside class="brand card">
+      <div class="profile">
+        <img src="../images/logo.png" alt="logo">
+        <h1>María Pérez</h1>
+        <p class="meta">maría@example.com</p>
+        <p class="meta">Instructor</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="card">
+        <div class="instructor-hero">
+          <div>
+            <div class="title">Panel de Instructor</div>
+            <div class="meta">Gestiona tus clases y clientes</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <a class="btn secondary" href="#">Inicio</a>
+            <button class="btn" style="background:#ef4444">Cerrar sesión</button>
+          </div>
+        </div>
+
+        <div class="main-grid" style="margin-top:14px">
+          <div class="stat"><div class="number">12</div><p>Clientes</p></div>
+          <div class="stat"><div class="number">3</div><p>Rutinas</p></div>
+          <div class="stat"><div class="number">5</div><p>Clases esta semana</p></div>
+        </div>
+
+        <div style="margin-top:14px">
+          <div style="display:flex;gap:8px">
+            <button class="tab small active">Mis clientes</button>
+            <button class="tab small">Crear rutina</button>
+            <button class="tab small">Programación</button>
+          </div>
+
+          <div class="panel clients-list" style="margin-top:12px">
+            <h3>Clientes asignados</h3>
+            <ul>
+              <li>María Pérez — pérdida de grasa</li>
+              <li>Carlos Ruiz — hipertrofia</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

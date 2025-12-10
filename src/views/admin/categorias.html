@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Categorías</title></head>
+<body>
+<h2>Categorías</h2>
+<div>
+  <input id="nombre" placeholder="Nombre">
+  <button id="crear">Crear</button>
+</div>
+<table id="tbl"><thead><tr><th>ID</th><th>Nombre</th><th>Acciones</th></tr></thead><tbody></tbody></table>
+<script>
+const API = '/api/categorias';
+async function load(){
+  const res = await fetch(API, { headers: authHeader() });
+  const j = await res.json();
+  const tbody = document.querySelector('#tbl tbody'); tbody.innerHTML='';
+  j.data.forEach(c => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${c.id}</td><td>${c.nombre}</td><td><button onclick="del(${c.id})">Eliminar</button></td>`;
+    tbody.appendChild(tr);
+  });
+}
+function authHeader(){
+  const t = prompt('Introduce token JWT (temporal)'); return { 'Authorization': 'Bearer ' + t };
+}
+document.querySelector('#crear').addEventListener('click', async ()=>{
+  const nombre = document.querySelector('#nombre').value;
+  await fetch(API, { method:'POST', headers: {...authHeader(),'Content-Type':'application/json'}, body: JSON.stringify({ nombre })});
+  load();
+});
+async function del(id){
+  await fetch(API + '/' + id, { method:'DELETE', headers: authHeader() });
+  load();
+}
+load();
+</script>
+</body>
+</html>
